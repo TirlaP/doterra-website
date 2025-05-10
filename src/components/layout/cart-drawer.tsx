@@ -25,7 +25,7 @@ export function CartDrawer() {
     if (!itemToRemove) return;
     
     // Calculate new total and count
-    const newTotal = total - (itemToRemove.product.price * itemToRemove.quantity);
+    const newTotal = total - (itemToRemove.product.price! * itemToRemove.quantity);
     const newCount = cart.reduce((acc, item) => {
       if (item.id !== id) {
         return acc + item.quantity;
@@ -48,7 +48,7 @@ export function CartDrawer() {
         const quantityDiff = newQuantity - item.quantity;
         
         // Update the total and count
-        setTotal(prev => prev + (item.product.price * quantityDiff));
+        setTotal(prev => prev + (item.product.price! * quantityDiff));
         setCartCount(prev => prev + quantityDiff);
         
         return { ...item, quantity: newQuantity };
@@ -113,7 +113,7 @@ export function CartDrawer() {
                     <div className="flex-1 min-w-0">
                       <h4 className="font-medium text-sm mb-1 truncate">{item.product.name}</h4>
                       <div className="text-sm text-gray-500 mb-2">
-                        {formatPrice(item.product.price)} × {item.quantity}
+                        {formatPrice(item.product.price!)} × {item.quantity}
                       </div>
                       
                       <div className="flex items-center">
@@ -143,7 +143,7 @@ export function CartDrawer() {
                     </div>
                     
                     <div className="font-medium">
-                      {formatPrice(item.product.price * item.quantity)}
+                      {formatPrice(item.product.price! * item.quantity)}
                     </div>
                   </li>
                 ))}
